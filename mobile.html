@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+    let mobile = function (pin) {
+        this.pin = pin;
+        this.tinNhanDangViet = [];
+        this.tinNhanGuiDi = [];
+        this.tinNhanNhanDuoc = [];
+        this.isOn = true;
+        this.checkOn = function () {
+            return this.isOn;
+        }
+
+        this.batDienThoai = function () {
+            this.isOn = true;
+        }
+        this.tatDienThoai = function () {
+            this.isOn = false;
+        }
+        this.sacPin =function () {
+            if (pin >= 100) {
+                return "Pin đầy";
+            } else {
+                this.pin += phanTramCanSac;
+                return "Đã sạc";
+            }
+        }
+        this.soanTinNhan = function (tinNhan) {
+            if (this.checkOn()){
+                this.tinNhanDangViet.push(tinNhan);
+                this.pin--;
+            } else {
+                alert("Bạn cần bật máy")
+            }
+        }
+        this.nhanTinNhan = function (tinNhan) {
+            if (this.checkOn()) {
+                alert("Nhận được 1 tin nhắn");
+                this.tinNhanNhanDuoc.push(tinNhan);
+                this.pin--;
+            } else {
+                alert("Phải bật máy để nhận được tin nhắn")
+            }
+        }
+        this.guiTinNhanDi = function (viTriTinNhan) {
+            if (this.checkOn()) {
+                alert("Đã gửi 1 tin nhắn");
+                this.tinNhanDangViet.splice(viTriTinNhan, 0);
+                this.tinNhanGuiDi.push(this.tinNhanDangViet[viTriTinNhan]);
+                this.pin--;
+            } else {
+                alert("Máy chưa bật");
+            }
+        }
+        this.xemTinNhanDaGui = function () {
+            if (this.checkOn()) {
+                for (let i = 0; i < this.tinNhanGuiDi.length; i++) {
+                    document.write(this.tinNhanGuiDi[i] + ",");
+                }
+                this.pin--;
+            } else {
+                alert("Bạn cần bật máy!");
+            }
+
+        }
+        this.xemTinNhanNhanDuoc = function () {
+            if (this.checkOn()) {
+            for (let i = 0; i < this.tinNhanNhanDuoc.length; i++) {
+                document.write(this.tinNhanNhanDuoc[i] + ",");
+            }
+            this.pin--;
+        } else {
+                alert("Bạn cần bật máy!");
+            }
+        }
+    }
+</script>
+<script>
+    let iphone = new mobile(80);
+    let nokia = new mobile(80);
+
+    iphone.soanTinNhan("Hello");
+    iphone.soanTinNhan("Hello1");
+    iphone.soanTinNhan("Hello2");
+    iphone.soanTinNhan("Hello3");
+    iphone.soanTinNhan("Hello4");
+    iphone.guiTinNhanDi(2);
+    iphone.xemTinNhanDaGui();
+</script>
+</body>
+</html>
